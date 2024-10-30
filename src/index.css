@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes levelUp {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.3);
+    filter: brightness(1.8);
+  }
+  50% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  75% {
+    transform: scale(1.3);
+    filter: brightness(1.8);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.animate-levelUp {
+  animation: levelUp 1s ease-in-out;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+/* Remove number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.stake-btn {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 6px rgba(247, 181, 0, 0.4);
+}
+
+.stake-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  background-size: 400%;
+  z-index: -1;
+  animation: rotate-glow 3s infinite linear;
+  opacity: 0.7;
+}
+
+@keyframes rotate-glow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 400% 0;
+  }
+}
+
+.jungle-background {
+  background-image: url('../assets/images/jungle_bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@keyframes smoke-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.smoke-scroll {
+  display: flex;
+  width: 200%;
+  font-size: 0; /* Removes any whitespace between inline elements */
+  line-height: 0;
+}
+
+.animate-smoke {
+  min-width: 100%;
+  will-change: transform;
+  animation: smoke-scroll 20s linear infinite;
+  opacity: 1;
+}
+
+.smoke-container {
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  font-size: 0; /* Ensures no whitespace */
+  line-height: 0;
+  animation: smoke-opacity 4s ease-in-out infinite;
+}
+
+@keyframes smoke-opacity {
+  0% {
+    opacity: 0;    /* Reduced from 0.5 to 0.3 */
+  }
+  50% {
+    opacity: 0.9;    /* More visible when light gleam is brightest */
+  }
+  100% {
+    opacity: 0;    /* Reduced from 0.5 to 0.3 */
+  }
+}
+
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s cubic-bezier(0.2, 0, 0.3, 1);
+}
+
+/* Remove or comment out the gleam animation */
+/*
+@keyframes gleam {
+  0% { 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-gleam {
+  animation: gleam 15s ease-in-out infinite;
+}
+*/
+
+@keyframes gleam {
+  0% { 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-gleam {
+  animation: gleam 10s ease-in-out infinite;
+}
+
+@keyframes bgGleam {
+  0% { 
+    filter: blur(1.5px) brightness(0.9) sepia(0.2);
+  }
+  50% { 
+    filter: blur(1.5px) brightness(1.4) sepia(0.4);
+  }
+  100% {
+    filter: blur(1.5px) brightness(0.9) sepia(0.2);
+  }
+}
+
+.animate-bgGleam {
+  animation: bgGleam 10s ease-in-out infinite;
+}
+
+/* Add these new animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.art-reveal-title {
+  position: relative;
+}
+
+.art-reveal-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  animation: shimmer 2s ease-out;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
+.countdown-box .bg-yellow-400 {
+  position: relative;
+}
+
+.countdown-box .bg-yellow-400::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  animation: shimmer 2s ease-out;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
+.shimmer-active::after {
+  animation-play-state: running;
+}
