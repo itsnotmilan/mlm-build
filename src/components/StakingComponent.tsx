@@ -194,23 +194,37 @@ const StakingComponent = () => {
     
     setIsLoading(true);
     try {
-      // Set particle source and trigger animation
-      setParticleSource('compound');
-      setShowParticles(false);
-      requestAnimationFrame(() => setShowParticles(true));
-
+      // Calculate all new values first
       const newStakedAmount = (parseFloat(gameState.stakedAmount) + parseFloat(displayedRewards)).toFixed(6);
-      
-      const newTotalXP = gameState.experience + compoundXp;
-      handleLevelUp(gameState.level, newTotalXP, gameState.maxExperience);
-      
-      const newTimeLeft = 24 * 60 * 60; // 24 hours in seconds
+      let newLevel = gameState.level;
+      let newXP = gameState.experience + compoundXp;
+      let newMaxXP = gameState.maxExperience;
+
+      // Calculate level ups
+      while (newXP >= newMaxXP) {
+        newXP -= newMaxXP;
+        newLevel += 1;
+        newMaxXP = Math.floor(newMaxXP * 1.2);
+      }
+
+      // Update all state in a single call
       updateGameState({
         stakedAmount: newStakedAmount,
         rewardAmount: '0',
-        timeLeft: newTimeLeft, // Add 24h timer
-        lastRewardUpdate: Date.now()
+        timeLeft: 24 * 60 * 60,
+        lastRewardUpdate: Date.now(),
+        level: newLevel,
+        experience: newXP,
+        maxExperience: newMaxXP
       });
+
+      // Reset animation states before starting new one
+      setShowParticles(false);
+      await new Promise(resolve => setTimeout(resolve, 50));
+      
+      // Start new animation
+      setParticleSource('compound');
+      requestAnimationFrame(() => setShowParticles(true));
 
     } catch (err) {
       console.error('Error compounding:', err);

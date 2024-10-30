@@ -135,7 +135,7 @@ export const LevelMeter: React.FC<LevelMeterProps> = ({ level, experience, maxEx
   const progressWidth = `${(displayExperience / displayMaxExperience) * 100}%`;
 
   return (
-    <div className="level-meter space-y-2">
+    <div className="space-y-2">
       <div className="flex justify-between items-center">
         <div className={`text-sm transition-all duration-500 ${isLevelingUp ? 'animate-levelUp text-yellow-400 font-bold' : ''}`}>
           Level {displayLevel} <span className="text-green-400">+{displayLevel * 20}%</span>

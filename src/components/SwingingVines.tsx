@@ -49,7 +49,7 @@ const Vine = ({ color, height, side, index, scrollY, thickness = 8, customLeft }
       height: `${height}px`,
       zIndex: 19,
       transform: `translateY(${scrollY * 0.08}px)`,
-      left: customLeft || (side === 'left' ? 'min(15%, 12rem)' : 'auto'),
+      left: customLeft || (side === 'left' ? 'clamp(15%, 25%, 30rem)' : 'auto'),
       right: (!customLeft && side === 'right') ? 'min(15%, 12rem)' : 'auto'
     }}
     variants={containerVariants}
